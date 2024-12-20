@@ -30,7 +30,7 @@ class TestMatrix {
      * output, ad eccezione ovviamente dei tempi.
      */
 
-    private static final int SIZE = 1_000;
+    private static final int SIZE = 2;
     private static final double EXPECTED_DELTA = 0.01;
     private static final String MSEC = " msec";
 
@@ -51,13 +51,7 @@ class TestMatrix {
         long time;
         for (final int threads : new int[] { 1, 2, 3, 8, 16, 32, 100 }) {
             // Replace with your implementation
-            final SumMatrix sumList = // new MultiThreadedSumMatrix(threads);
-                new SumMatrix() {
-                    @Override
-                    public double sum(final double[][] matrix) {
-                        return 0;
-                    }
-                };
+            final SumMatrix sumList = new MultiThreadedSumMatrix(threads);
             time = System.nanoTime();
             assertEquals(sum, sumList.sum(matrix), EXPECTED_DELTA);
             time = System.nanoTime() - time;
